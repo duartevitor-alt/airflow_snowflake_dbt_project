@@ -2,6 +2,9 @@
 
 The aim of this project was to put into practice various skills by integrating Snowflake with Airflow and performing data transformations using dbt.
 
+![image](https://github.com/duartevitor-alt/airflow_snowflake_dbt_project/assets/82652783/a032eec1-62f1-4f3d-aa33-e25c21b08062)
+
+
 ## Source
 
 The selected data source for this project is the RapidAPI service. Specifically, data is obtained from the StreamlineWatch Streaming Guide API, which offers information about movies and TV series available on platforms like Netflix and Hulu. The API is accessed through a PythonOperator in Airflow. To replicate this process, you need to create a RapidAPI account and subscribe to the API [here](https://rapidapi.com/StreamlineWatch/api/streamlinewatch-streaming-guide).
@@ -21,6 +24,9 @@ Upon storing the JSON data in ADLS, a stored procedure is executed in Snowflake.
 ## dbt
 
 dbt (data build tool) is employed to transform the raw Snowflake data. The process involves normalizing the data (raw_stag), eliminating duplicates (raw_init), building dimensions and facts (silver), and performing aggregation (gold). The transformed data is materialized into tables (transient by default). Some data quality checks remain outstanding and will be implemented in the future. Data lineage is visible in the provided images. Note that dbt defaults to port 8080, which conflicts with Airflow's port. To resolve this, utilize the command `dbt docs generate` followed by `dbt docs serve --port <your_chosen_port>`. For seamless dbt-Airflow integration, the Cosmos framework is recommended.
+
+![image](https://github.com/duartevitor-alt/airflow_snowflake_dbt_project/assets/82652783/e8f465ca-ccfa-4444-96c9-0dfc655a2708)
+
 
 ## Notes
 
