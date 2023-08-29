@@ -1,3 +1,44 @@
+Voce pode preparar um belo readme.md para mim? Em ingles por favor
+
+
+Movies project
+O objetivo do projeto foi testar alguns conhecimentos adquiridos no snowflake, interando-o com o airflow e realizando algumas transformacoes com o dbt.
+
+-Source:
+A source escolhida foi sobre foi API, rapidAPI, onde basicamente o conteudo (dados) escolhidos sao filmes/series da netflix e hulu.
+Essa API 'e consumida por um pythonoperator no airflow. Para replicar voce deve criar sua conta na rapidAPI e subscrever-se neste link https://rapidapi.com/StreamlineWatch/api/streamlinewatch-streaming-guide.
+
+-Local file storage:
+Usado so para escrever (.json) a response da API. Como foi criada um novo folder "outputmovies" para que o airflow tenha acesso 'e necessario incluir uma nova linha na dockerfile.
+
+-Data Lake:
+Azure ADLS Gen2 - Escolhido apenas porque eu ja tinha configuracoes feitas entre o snowflake e azure (storage integration). Apos o .json cair no lake ele 'e apagado do storage local.
+
+-Snowflake:
+Apos o .json ser posto no ADLS, uma stored procedure 'e executada para copiar esse dados para uma table raw e em caso de error copiar para uma tabela de 'error'. Aqui foi-se criado um role e user para o airflow, todo o processo de caso deixo em snowflake_queries/GRANT.sql e a stored procedure em snowflake_queries/USP.sql
+
+-dbt:
+O dbt ir'a olhar para essa tabela raw do snoflake e normaliza-la (raw_stag),  depois remover duplicadas (raw_init), construir dimensoes e fato (silver) e realizar uma agregacao (gold). Processo simples apenas para ilustrar uma trransformacao completa dos dados. Todos os dados foram materializados como tabelas (Transient by default). Ainda falta alguns data quality checks mas isso sera feito em posterior. Data lineage visto nas imagens, cuidado apenas pois por default o dbt usa a porta 8080 (mesma do airflow) para criar os docs (dbt docs generate and then dbt docs serve --port <choice_a_porte>). Para melhor uso do dbt no airflow uso-se a framework cosmos
+
+-Observacoes:
+Pode ser que algum objetivo seja preciso criar no snowflake, 'e normal;
+As conexoes do airflow sao relativamente tranquilas de serem feitas (encontra-se facil na net);
+profiles.yml necessidade de edicao;
+O airflow foi deployed localmente com o astro cli (mantive o readme da astronome abaixo)
+O objetivo do projeto foi mesmo por em pratica algumas coisas que aprendi nos ultimos dias, entao para uma replicacao 100% o melhor seria contactar-me :).
+
+Referencias:
+snowflake doc: https://docs.snowflake.com/
+marc lamberti video (muito bom): https://www.youtube.com/watch?v=DzxtCxi4YaA&t=1933s
+https://registry.astronomer.io/providers/apache-airflow-providers-microsoft-azure/versions/6.2.2/modules/LocalFilesystemToADLSOperator
+https://registry.astronomer.io/providers/apache-airflow-providers-snowflake/versions/4.4.2/modules/SnowflakeOperator
+
+-Proximos passos:
+Uma boa opcoes seria criar um sensor customizado para realizar uma ingestao em batch (local - ADLS);
+Modificar/incluir astro_sdk em alguns locais do pipeline. 
+
+
+
 Overview
 ========
 
