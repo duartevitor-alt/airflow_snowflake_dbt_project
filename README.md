@@ -30,6 +30,7 @@ dbt (data build tool) is employed to transform the raw Snowflake data. The proce
 
 ## Notes
 
+- The transactional fake fact table is available in `snowflake_queries/` (.csv). The table defition is also there (transactional_fact_ddl.sql)
 - Certain Snowflake objects might need to be created for full replication.
 - Establishing Airflow connections is typically straightforward (resources are available online).
 - Edit `profiles.yml` as per your environment requirements.
