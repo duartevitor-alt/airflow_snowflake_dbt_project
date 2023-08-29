@@ -61,11 +61,7 @@ services:
       - /home/utilizador/Documents/airflow-course/include:/usr/local/airflow/include:z
       - /home/utilizador/Documents/airflow-course/outputmovies:/usr/local/airflow/outputmovies
       - /home/utilizador/Documents/airflow-course/tests:/usr/local/airflow/tests:z
-      - /home/utilizador/.ssh:/home/astro/.ssh:z
-      - /tmp/airbyte_local/cdc_airbyte:/usr/local/airflow/cdc_airbyte:z
-      - /home/utilizador/Documents/airflow-course/airflow_settings.yaml:/usr/local/airflow/airflow_settings.yaml:z
 
-      
       - airflow_logs:/usr/local/airflow/logs
       
     
