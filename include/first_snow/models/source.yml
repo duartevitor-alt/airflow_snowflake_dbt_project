@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: first_snow
+    database: managed_db  
+    schema: movies  
+    tables:
+      - name: raw_movies_content
+      - name: raw_transactional_sales_movies_fill

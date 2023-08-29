@@ -1,0 +1,13 @@
+first_snow:
+  outputs:
+    dev:
+      account: 
+      database: 
+      password: 
+      role: 
+      schema: 
+      threads: 1
+      type: snowflake
+      user: 
+      warehouse: 
+  target: dev
