@@ -73,7 +73,7 @@ with DAG(
         }
 
         headers: dict = {
-            "X-RapidAPI-Key": "99db2141demsh09abfc817987e36p1ab64fjsna98ec46633e2",
+            "X-RapidAPI-Key": "<rapidapi_key>",
             "X-RapidAPI-Host": "streamlinewatch-streaming-guide.p.rapidapi.com"
         }
 
